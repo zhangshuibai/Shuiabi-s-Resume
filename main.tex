@@ -1,0 +1,449 @@
+%
+%Academic CV LaTeX Template (filled for Shuibai Zhang)
+%
+
+\documentclass[a4paper,11pt]{article}
+
+% Package imports
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome5}
+
+% Color definitions
+\definecolor{darkblue}{RGB}{0,0,139}
+
+% Page layout
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\setlength{\footskip}{5pt} % Addressing fancyhdr warning
+
+% Hyperlink setup (moved after fancyhdr to address warning)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
+\urlstyle{same}
+
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Commands for icon sizing and positioning
+\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
+\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+
+% Font options
+\newcommand{\headerfonti}{\fontfamily{phv}\selectfont} % Helvetica-like (similar to Arial/Calibri)
+\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont} % Times-like (similar to Times New Roman)
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino (elegant serif)
+\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont} % Bookman (readable serif)
+\newcommand{\headerfontv}{\fontfamily{pag}\selectfont} % Avant Garde-like (similar to Trebuchet MS)
+\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont} % Computer Modern Sans Serif
+\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont} % Quasi-Helvetica (another Arial/Calibri alternative)
+\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont} % Quasi-Palatino (another elegant serif option)
+\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont} % Quasi-Times (another Times New Roman alternative)
+\newcommand{\headerfontx}{\fontfamily{bch}\selectfont} % Charter (clean serif font)
+
+\begin{document}
+\headerfontiii
+
+%==========================
+% Header
+%==========================
+\begin{center}
+    {\Huge\textbf{Shuibai Zhang}}
+\end{center}
+\vspace{-6mm}
+
+\begin{center}
+    \small{
+    \href{mailto:shuibai@cs.wisc.edu}{shuibai@cs.wisc.edu} \;|\;
+    \href{https://zhangshuibai.github.io}{Personal Website} \;|\;
+    \href{https://zhangshuibai.github.io/blog/}{Blog} \;|\;
+    \href{https://scholar.google.com/citations?user=jkXzD7YAAAAJ&hl=en&authuser=2}{Google Scholar}
+    }
+\end{center}
+\vspace{-4mm}
+
+\begin{center}
+    \small{Madison, Wisconsin, USA}
+\end{center}
+
+\vspace{-4mm}
+
+%==========================
+% Objective
+%==========================
+% \section{\textbf{Objective}}
+% \vspace{1mm}
+% \small{
+% Ph.D. student in Computer Science at the University of Wisconsin--Madison, focusing on post-training of large foundation models. I aim to develop efficient, robust, and controllable language models through reinforcement learning with verifiable rewards and diffusion language models for next-generation reasoning and planning systems.
+% }
+% \vspace{-2mm}
+
+%==========================
+% Research Interests
+%==========================
+\section{\textbf{Research Interests}}
+\vspace{1mm}
+\small{
+I am broadly interested in \textbf{language modeling}, and I explore directions including \textbf{post-training} (e.g., reinforcement learning and on-policy distillation), \textbf{diffusion language models (DLMs)}, and \textbf{test-time training}. 
+
+\vspace{0.5em}
+As an impact-driven researcher, I aim to build scalable methods that are effective in practice and deliver real-world impact.
+}
+\vspace{-2mm}
+
+%==========================
+% Education
+%==========================
+\section{\textbf{Education}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+    {University of Wisconsin--Madison}{Madison, USA}
+    {Ph.D. Student in Computer Science}{2024 -- Present}
+\resumeItemListStart
+    \item Research focus: RL for LLMs, diffusion language models (DLMs), LLM reasoning, Mixtrure of Experts (MOE).
+\resumeItemListEnd
+
+
+\resumeSubheading
+{University of Electronic Science and Technology of China (UESTC)}{Chengdu, China}
+{B.Eng. in Electronic Information Engineering}{2019 -- 2023}
+\resumeItemListStart
+\item Dual-degree program with University of Glasgow
+\resumeItemListEnd
+
+\resumeSubheading
+{University of Glasgow (UoG)}{Glasgow, United Kingdom}
+{B.Eng. in Electrical \& Electronic Engineering}{2019 -- 2023}
+\resumeItemListStart
+\item Dual-degree program with UESTC
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+\section{\textbf{Research Highlights}}
+\vspace{-0.5mm}
+\small{
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+    \item 11 papers accepted at top ML conferences (ICML, ICLR, NeurIPS, COLM, CVPR, ACL), including 4 \textbf{oral presentations}.
+    \item Experience training 0.5B--7B models; strong background in \textbf{Reinforcement Learning} for LLMs.
+    \item Hands-on experience with large-scale LLM training using \textbf{Megatron}, \textbf{VeOmni}, and RL post-training with the \textbf{VERL} framework.
+    \item Hands-on experience training and optimizing \textbf{Mixture-of-Experts (MoE)} models, including routing, load balancing, and scaling efficiency.
+    \item Extensive experience developing and analyzing \textbf{diffusion LLMs}, covering pretraining, post-training, and inference acceleration.
+
+\end{itemize}
+}
+
+
+
+
+\section{\textbf{Open-Source Contributions}}
+\vspace{-0.5mm}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Open-dCoder: The First Fully Open Diffusion LLM for Code}
+  {Open Source Project}
+  {Jul 2025 -- Sep 2025}
+  {{[\href{https://github.com/pengzhangzhi/Open-dLLM}{\textcolor{darkblue}{GitHub (\faStar{} 632)}}] \; [\href{https://oval-shell-31c.notion.site/Open-dLLM-Open-Diffusion-Large-Language-Model-25e03bf6136480b7a4ebe3d53be9f68a}{\textcolor{darkblue}{Project Page}}]}}
+\resumeItemListStart
+  \item \textbf{Co-Lead}: Co-directed the development and release of the first fully open-source diffusion LLM for coding.
+  \item Built and released a 0.5B diffusion language model for code with full pipeline and evaluation suite.
+  \item Project has received strong community adoption with \textbf{579 GitHub stars} by Apr 2026.
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% \section{\textbf{Research Projects}}
+% \vspace{-0.4mm}
+% \resumeSubHeadingListStart
+
+% ===================== Project 1 =====================
+% \resumeProject
+%   {Diffusion Language Model Beats Autoregressive Language Model in Correction}
+%   {Sole Lead Researcher — Ongoing}
+%   {Sep 2025 -- Present}
+%   {}
+% \resumeItemListStart
+%   \item \textbf{Sole lead researcher} overseeing problem formulation, benchmark design, model development, and experiments.
+%   \item Developed the \textbf{Code Revision Benchmark (CRB)}, a new evaluation suite for non-causal ``correction'' tasks such as bug fixing and constraint-based puzzle resolution.
+%   \item Introduced a new \textbf{post-training paradigm for diffusion LLMs} that enables iterative error correction by conditioning on corrupted inputs, and developed a \textbf{correction-oriented diffusion language model (cDLM)} built on this framework.
+%   \item Preparing manuscript for submission to \textbf{ICML 2026}.
+% \resumeItemListEnd
+
+
+
+% ===================== Project 2 =====================
+% \resumeProject
+%   {Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?}
+%   {Sole Lead Researcher — Krafton AI}
+%   {Jul 2025 -- Sep 2025}
+%   {{[\href{https://drive.google.com/file/d/1ci-g7yh1u5dR_jGvNCZAAoUk84fMulOw/view?usp=drive_link}{\textcolor{darkblue}{Manuscript}}]}}
+% \resumeItemListStart
+%   \item \textbf{Sole lead researcher} driving theory, algorithm design, and experimental validation.
+%   \item Identified that clipping—not importance-ratio scaling—is the primary stabilizer in Group Relative Policy Optimization (GRPO) for LLM post-training.
+%   \item Proposed \textbf{Self-Importance Clipping (SIC)}, a \textbf{ratio-free} optimization method leveraging model confidence as a gating signal to suppress unstable updates.
+%   \item Provided formal analysis showing that extreme-confidence tokens amplify KL sensitivity, explaining how clipping enforces a soft trust-region constraint on policy drift.
+%   \item Achieved \textbf{37\% faster training} while maintaining GRPO-level stability and reasoning performance on AIME, OlympiadBench, and MATH500 using Qwen models.
+% \resumeItemListEnd
+
+% \resumeSubHeadingListEnd
+% \vspace{-6mm}
+
+
+\section{\textbf{Publications \& Manuscripts}}
+\vspace{0.5mm}
+\small{\textit{* = equal contribution}}
+\vspace{1mm}
+
+\small{
+\begin{itemize}[leftmargin=*,itemsep=6pt]
+
+% ===== Manuscripts (Under Review, newest first) =====
+\item \href{https://arxiv.org/pdf/2605.18530}{
+Zhihan Yang, Wei Guo, \textbf{Shuibai Zhang}, Subham Sekhar Sahoo,
+Yongxin Chen, Arash Vahdat, Morteza Mardani*, John Thickstun*,
+``Continuous Diffusion Scales Competitively with Discrete Diffusion for Language''} \\
+\hfill \textit{Under Review -- NeurIPS 2026}
+
+\item \href{https://arxiv.org/pdf/2512.15596}{\textbf{Shuibai Zhang}, Fred Zhangzhi Peng, Yiheng Zhang, Jin Pan, Grigorios G. Chrysos, 
+``Corrective Diffusion Language Model''} \\
+\hfill \textit{Under Review — NeurIPS 2026}
+
+\item \href{https://arxiv.org/abs/2604.11978}{Xinyu Jessica Wang, Haoyue Bai, Yiyou Sun, Haorui Wang, \textbf{Shuibai Zhang}, Wenjie Hu, Mya Schroder, Bilge Mutlu, Dawn Song, Robert D. Nowak, 
+``Position: The Long-Horizon Task Mirage? Diagnosing Where and Why Agentic Systems Break''} \\
+\hfill \textit{Under Review — EMNLP 2026}
+
+\item \href{https://arxiv.org/abs/2604.01622}{ \textbf{Shuibai Zhang}*, Xialie Zhuang*, Chihan Cui*, Zhihan Yang, Fred Zhangzhi Peng, Yanxin Zhang, Haoyue Bai, Zack Jia, Yang Zhou, Guanhua Chen, Ming Liu,
+``Expert-Choice Routing Enables Adaptive Computation in Diffusion Language Models''} \\
+\hfill \textit{COLM 2026}
+
+\item \href{https://openreview.net/forum?id=eiOwyAa2O1&noteId=eiOwyAa2O1}{\textbf{Shuibai Zhang}*, Junhyuck Kim*, Gyeongman Kim, Jaewoong Cho, 
+``Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?''} \\
+% \hfill \textit{Under s — ICML 2026}
+\hfill \textit{ICLR 2026 SPOT Workshop: Scaling Post-training for LLMs }
+
+\item \href{https://www.arxiv.org/pdf/2512.00831}{Yuchen Zeng*, \textbf{Shuibai Zhang}*, Wonjun Kang*, et al., Dimitris Papailiopoulos, Kangwook Lee,  
+``ReJump: A Tree-Jump Representation for Analyzing and Improving LLM Reasoning''} \\
+\hfill \textit{ICML 2026}
+
+\item \href{https://arxiv.org/pdf/2512.04459v1}{Yingzi Ma, Yulong Cao, Wenhao Ding, \textbf{Shuibai Zhang}, 
+Yan Wang, Ming Jiang, Boris Ivanovic, Marco Pavone, Chaowei Xiao,  
+``dVLM-AD: Enhance Diffusion Vision-Language-Model for Driving via Controllable Reasoning''} \\
+\hfill \textit{CVPR 2026 (Findings)}
+
+\item \href{https://arxiv.org/pdf/2510.04767}{
+Wonjun Kang, Kevin Galim, Seunghyuk Oh, Minjae Lee, Yuchen Zeng, 
+\textbf{Shuibai Zhang}, Coleman Hooper, Yuezhou Hu, Hyung Il Koo, Nam Ik Cho, Kangwook Lee,  
+``ParallelBench: Understanding the Tradeoffs of Parallel Decoding in Diffusion LLMs''} \\
+\hfill \textit{ICLR 2026}
+
+\item \href{https://www.arxiv.org/pdf/2509.23405}{
+Fred Zhangzhi Peng, Zachary Bezemek, Jarrid Rector-Brooks, \textbf{Shuibai Zhang}, 
+Anru R. Zhang, Michael Bronstein, Avishek Joey Bose, Alexander Tong,  
+``Planner Aware Path Learning in Diffusion Language Models Training''} \\
+\hfill \textit{ICLR 2026 — \textbf{Oral Presentation}}
+
+
+% ===== Accepted Publications (chronological: newest → oldest) =====
+
+\item \href{https://arxiv.org/pdf/2502.06737}{
+Thomas Zeng, \textbf{Shuibai Zhang}, et al., Kannan Ramchandran, Dimitris Papailiopoulos, Kangwook Lee, 
+``VersaPRM: Multi-Domain Process Reward Model via Synthetic Reasoning Data''} \\
+\hfill \textit{ICML 2025 — \textbf{Oral Presentation}}
+
+\item \href{https://arxiv.org/pdf/2410.08695}{
+Yue Yang*, \textbf{Shuibai Zhang*}, Wenqi Shao*, Kaipeng Zhang, Yi Bin, Yu Wang, Ping Luo, 
+``Dynamic Multimodal Evaluation with Flexible Complexity by Vision-Language Bootstrapping''} \\
+\hfill \textit{ICLR 2025 — \textbf{Oral Presentation}}
+
+\item \href{https://arxiv.org/pdf/2406.07230v1}{
+Weiyun Wang*, \textbf{Shuibo Zhang*}, Yiming Ren*, Yuchen Duan*, Tiantong Li*, et al., Wenhai Wang, 
+``Needle In A Multimodal Haystack''} \\
+\hfill \textit{NeurIPS 2024}
+
+\item \href{https://arxiv.org/pdf/2312.15918.pdf}{
+Linyi Yang*, \textbf{Shuibai Zhang*}, Zhuohao Yu*, et al., Xing Xie, Weizhu Chen, Yue Zhang,
+``Supervised Knowledge Makes Large Language Models Better In-Context Learners''} \\
+\hfill \textit{ICLR 2024}
+
+\item \href{https://aclanthology.org/2023.findings-acl.806.pdf}{
+Linyi Yang*, \textbf{Shuibai Zhang*}, et al., Jindong Wang, Xing Xie, Yue Zhang,
+``GLUE-X: Evaluating Natural Language Understanding Models from an Out-of-distribution Generalization Perspective''} \\
+\hfill \textit{ACL 2023 (Findings)}
+
+\end{itemize}
+}
+\vspace{-4mm}
+
+
+
+%==========================
+% Work Experience
+%==========================
+\section{\textbf{Research Experience}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{\href{https://www.krafton.ai/en/}{Krafton AI}}{Madison, USA}
+{Research Intern}{Jul 2025 -- Sep 2025}
+
+\resumeSubheading
+{\href{https://www.shlab.org.cn/}{Shanghai Artificial Intelligence Laboratory}}{Shanghai, China}
+{Research Assistant}{May 2024 -- Aug 2024}
+
+\resumeSubheading
+{\href{https://westlakenlp.com/}{WestlakeNLP Lab, Westlake University}}{Hangzhou, China}
+{Research Assistant}{Jun 2023 -- Apr 2024}
+
+\resumeSubHeadingListEnd
+\vspace{-6mm}
+
+%==========================
+% Teaching Experience
+%==========================
+\section{\textbf{Teaching Experience}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{COMP SCI 220: Data Science Programming I}{University of Wisconsin--Madison}
+{Teaching Assistant}{Spring \& Fall 2025}
+
+\resumeSubheading
+{COMP SCI 300: Programming II}{University of Wisconsin--Madison}
+{Teaching Assistant}{Fall 2024}
+
+\resumeSubHeadingListEnd
+\vspace{-4mm}
+
+\section{\textbf{Technical Skills}}
+\vspace{-0.5mm}
+\small{
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+
+    \item \textbf{Language Models:} Diffusion LLMs, Autoregressive LLMs, RLHF/RLVR, GRPO/PPO/SFT, MOE Design.
+
+    \item \textbf{Machine Learning:} Deep Learning, Reinforcement Learning, Optimization, Evaluation Design.
+
+    \item \textbf{Large-Scale Training:} Distributed training (DDP/FSDP); proficient with \textbf{Megatron} and the \textbf{VeOmni} pretraining framework, and the \textbf{VERL} RL post-training framework.
+
+    \item \textbf{Tools \& Infrastructure:} Weights \& Biases, Docker, Git, Linux.
+
+\end{itemize}
+}
+\vspace{-4mm}
+
+
+
+\end{document}
