@@ -1,0 +1,58 @@
+name: Build and publish CV
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'main.tex'
+      - 'latexmkrc'
+      - '*.png'
+      - '.github/workflows/build-cv.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never run two Pages deployments at once; let the newest win.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile main.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+
+      - name: Assemble the site
+        run: |
+          mkdir -p site
+          cp main.pdf site/Shuibai_Zhang_CV.pdf
+          cat > site/index.html <<'HTML'
+          <!doctype html>
+          <meta charset="utf-8">
+          <title>Shuibai Zhang — CV</title>
+          <meta http-equiv="refresh" content="0; url=Shuibai_Zhang_CV.pdf">
+          <p><a href="Shuibai_Zhang_CV.pdf">Shuibai Zhang — CV (PDF)</a></p>
+          HTML
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
